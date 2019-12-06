@@ -1,39 +1,28 @@
 package Leetcode;
-import java.util.*;
+
 public class _31 {
-
-
+    public static void main(String[] args) {
+        Solution31 sol = new Solution31();
+        sol.nextPermutation(new int[]{1, 2, 3});
+    }
 }
-
 
 class Solution31 {
     public void nextPermutation(int[] nums) {
-        int flag = 0;
-        for(int i = nums.length - 1  ; i > 0; i--){
-            if(nums[i]>nums[i-1]){
-                flag = i;
-                break;
-            }
-        }
-        if (flag==0){
-            Arrays.sort(nums);
-        }
-        else {
-            int[] sub = new int[nums.length-flag];
-            for(int i = flag; i < nums.length; i++){
-                sub[i-flag] = nums[i];
-            }
-            for(int i = sub.length; i >= 0; i--){
-                if(sub[i]>nums[flag-1]){
-                    int mid = sub[i];
-                    sub[i] = nums[flag-1];
-                    nums[flag - 1] = mid;
-                    break;
+
+        int len=nums.length;
+        for (int i = len-1; i >=0 ; i--)
+        {
+            for(int j =i-1;j>=0;j--)
+            {
+                int stn=0;
+                if (nums[j]<nums[i]){
+                    stn=nums[j];
+                    nums[j]=nums[i];
+                    nums[i]=stn;
+                    for (int x:nums){System.out.println(x);}
+                    return;
                 }
-            }
-            Arrays.sort(sub);
-            for(int i = flag; i < nums.length; i++){
-                nums[i] = sub[i-flag];
             }
         }
 
